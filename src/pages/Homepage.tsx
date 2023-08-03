@@ -6,6 +6,8 @@ import ConfigurationMenu from "../components/ConfigurationMenu.tsx";
 import ListNode from "../interfaces/ListNode.ts";
 import Connector from "../interfaces/Connector.ts";
 
+import { Cog6ToothIcon } from "@heroicons/react/24/solid";
+
 export default function Homepage() {
   const [nodes, setNodes] = useState<ListNode[]>([]);
   const [connectors, setConnectors] = useState<Connector[]>([]);
@@ -20,7 +22,10 @@ export default function Homepage() {
           onClick={() => setDisplayConfigMenu(!displayConfigMenu)}
           className="bg-slate-900 px-10 py-2 rounded-xl flex  items-center border-t border-slate-800 transition duration-1 hover:bg-slate-800 hover:border-slate-700"
         >
-          <div className="mr-3">Configuration Menu</div>
+          <div className="mr-3 font-medium flex items-center">
+            <Cog6ToothIcon className="w-4 h-4 text-slate-200 mr-1" />
+            Configuration
+          </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
