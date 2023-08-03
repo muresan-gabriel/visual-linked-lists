@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const CursorTracker = ({ cursorRef, onDrag, onStop }) => {
+const CursorTracker = ({ cursorRef, onDrag }) => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const CursorTracker = ({ cursorRef, onDrag, onStop }) => {
   return (
     <div
       ref={cursorRef}
-      className="p-1 absolute bg-red-400 rounded-full"
+      className="absolute rounded-full"
       style={{ left: cursorPosition.x, top: cursorPosition.y }}
     ></div>
   );

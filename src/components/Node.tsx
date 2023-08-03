@@ -1,4 +1,26 @@
-import Draggable from "react-draggable";
+import Draggable, {
+  DraggableEvent,
+  DraggableEventHandler,
+} from "react-draggable";
+import { useState } from "react";
+import React from "react";
+
+import ListNode from "../interfaces/ListNode";
+import Connector from "../interfaces/Connector";
+
+interface NodeProps {
+  node: ListNode;
+  nodes: ListNode[];
+  setNodes: (nodes: ListNode[]) => void;
+  offset: number;
+  width: number;
+  height: number;
+  connectors: Connector[];
+  setConnectors: (connectors: Connector[]) => void;
+  cursorRef: React.RefObject<any>;
+  onDrag: DraggableEventHandler;
+  onStop: DraggableEventHandler;
+}
 
 export default function Node({
   node,
@@ -12,7 +34,7 @@ export default function Node({
   cursorRef,
   onDrag,
   onStop,
-}) {
+}: NodeProps) {
   function addConnector() {
     setConnectors([...connectors, { from: node.own_address, to: cursorRef }]);
     localStorage.setItem("from_node", node.own_address);
@@ -67,7 +89,7 @@ export default function Node({
         <span className="pointer p-2 w-[9rem] rounded-lg text-center ">
           {node.pointer}
         </span>
-        <span className="absolute -translate-y-[1rem] translate-x-[9.5rem] text-xs bg-amber-600 px-5 rounded-tl-md rounded-tr-md">
+        <span className="absolute -translate-y-[1rem] translate-x-[9.5rem] text-xs bg-amber-600 w-[7.6rem] rounded-tl-md rounded-tr-md text-center">
           {node.own_address}
         </span>
         <div

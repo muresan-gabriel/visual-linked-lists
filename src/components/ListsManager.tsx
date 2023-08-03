@@ -1,13 +1,19 @@
-import { Node } from "../utils/utils.functions.js";
+import React from "react";
+import { Node } from "../utils/utils.functions.ts";
 
-export default function ListsManager({ nodes, setNodes }) {
+interface Props {
+  nodes: Node[];
+  setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
+}
+
+export default function ListsManager({ nodes, setNodes }: Props) {
   function addNode() {
-    const newNode = new Node("Test Data");
+    const newNode = new Node("Test Data", nodes);
     setNodes([...nodes, newNode]);
   }
 
   return (
-    <div className="bg-slate-800 col-span-2">
+    <div className="bg-slate-800 col-span-2 border-t border-slate-700">
       <div className="text-center mt-2">List Manager</div>
       <div className="flex flex-col items-center p-3">
         <button
