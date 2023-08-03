@@ -5,6 +5,7 @@ import Node from "./Node";
 import CursorTracker from "./CursorTracker";
 import Connector from "../interfaces/Connector";
 import ListNode from "../interfaces/ListNode";
+import ContextMenu from "./ContextMenu";
 
 interface ListsContainerProps {
   nodes: ListNode[];
@@ -33,13 +34,27 @@ const ListsContainer: React.FC<ListsContainerProps> = ({
   const offset = 10;
 
   const updateXarrow = useXarrow();
+  const [isContextMenuOpen, setContextMenuOpen] =
+    React.useState<boolean>(false);
 
   return (
     <div
       className="bg-slate-900 col-span-7 border-t border-slate-800"
       id="parent"
       ref={parentRef}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        setContextMenuOpen(!isContextMenuOpen);
+      }}
     >
+      <ContextMenu
+        display={isContextMenuOpen}
+        setDisplay={setContextMenuOpen}
+        nodes={nodes}
+        setNodes={setNodes}
+        connectors={connectors}
+        setConnectors={setConnectors}
+      />
       {nodes.map((node, index) => {
         return (
           <Node

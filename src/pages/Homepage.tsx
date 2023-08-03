@@ -17,7 +17,7 @@ export default function Homepage() {
   return (
     <main className="h-full p-5">
       <div className="flex place-content-between flex items-center">
-        <div className="font-bold text-lg">Visual Linked Lists</div>
+        <div className="font-bold text-lg ml-5">Visual Linked Lists</div>
         <button
           onClick={() => setDisplayConfigMenu(!displayConfigMenu)}
           className="bg-slate-900 px-10 py-2 rounded-xl flex  items-center border-t border-slate-800 transition duration-1 hover:bg-slate-800 hover:border-slate-700"

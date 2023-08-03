@@ -17,13 +17,10 @@ export default function ListsManager({ nodes, setNodes }: Props) {
       <div className="text-center mt-2">List Manager</div>
       <div className="flex flex-col items-center p-3">
         <button
-          className="bg-slate-700 py-2 text-sm font-medium w-full rounded-lg mb-2 transition duration-1 hover:bg-slate-600"
+          className="bg-slate-700 py-2 text-sm font-medium w-full rounded-lg mb-2 transition duration-1 hover:bg-slate-600 border-t border-slate-600 hover:border-slate-500"
           onClick={addNode}
         >
           Add Node
-        </button>
-        <button className="bg-slate-700 py-2 text-sm font-medium w-full rounded-lg mb-2 transition duration-1 hover:bg-slate-600">
-          Remove Node
         </button>
       </div>
     </div>

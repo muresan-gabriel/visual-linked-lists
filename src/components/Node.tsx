@@ -80,7 +80,7 @@ export default function Node({
       onStop={onStop}
     >
       <div
-        className="bg-slate-800 w-[18rem] flex text-md rounded-lg cursor-move absolute"
+        className="bg-slate-800 w-[18rem] flex text-md rounded-lg cursor-move absolute node__container"
         id={node.own_address}
       >
         <span className="data bg-indigo-500 p-2 w-[9rem] rounded-lg text-center">
