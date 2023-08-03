@@ -1,5 +1,5 @@
 class State {
-  static addressType: string = "simplified";
+  static addressType: string = localStorage.getItem("address_type") || "real";
   static addressTypeList: string[] = [
     "real",
     "integers",
@@ -17,6 +17,7 @@ class State {
 
   static setAddressType(addressType: string) {
     State.addressType = addressType;
+    localStorage.setItem("address_type", addressType);
   }
 }
 
