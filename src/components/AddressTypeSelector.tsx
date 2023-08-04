@@ -23,12 +23,19 @@ export default function AddressTypeSelector(props: AddressTypeSelectorProps) {
 
   function changeAddressType(addressType: string) {
     State.setAddressType(addressType);
-    setState(new State());
 
     props.nodes.map((node) => {
+      if (node.pointer) {
+        node.setPointer(null);
+      }
+
       node.setOwnAddress(props.nodes);
       return node;
     });
+
+    props.setConnectors([]);
+
+    setState(new State());
   }
 
   return (
