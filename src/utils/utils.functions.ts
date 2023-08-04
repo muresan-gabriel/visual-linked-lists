@@ -9,6 +9,7 @@ import State from "../State.ts";
 class Node implements ListNode {
   data: any;
   pointer: string;
+  prevPointer: string | null;
   own_address: string;
 
   constructor(data: any, nodes) {
@@ -25,13 +26,17 @@ class Node implements ListNode {
     return this.pointer;
   }
 
-  setOwnAddress(nodes) {
+  setOwnAddress(nodes: ListNode[]) {
     let generatedAddress: string;
     do {
       generatedAddress = this.getRandomAddress();
     } while (nodes.some((node) => node.own_address === generatedAddress));
 
     this.own_address = generatedAddress;
+  }
+
+  setData(data) {
+    this.data = data;
   }
 
   getRandomAddress(): string {

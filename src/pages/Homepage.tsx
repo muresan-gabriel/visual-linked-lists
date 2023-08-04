@@ -6,7 +6,7 @@ import ConfigurationMenu from "../components/ConfigurationMenu.tsx";
 import ListNode from "../interfaces/ListNode.ts";
 import Connector from "../interfaces/Connector.ts";
 
-import { Cog6ToothIcon } from "@heroicons/react/24/solid";
+import { Cog6ToothIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 
 export default function Homepage() {
   const [nodes, setNodes] = useState<ListNode[]>([]);
@@ -26,20 +26,15 @@ export default function Homepage() {
             <Cog6ToothIcon className="w-4 h-4 text-slate-200 mr-1" />
             Configuration
           </div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-4 h-4"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <ChevronDownIcon className="w-4 h-4 text-slate-200" />
         </button>
-        <ConfigurationMenu display={displayConfigMenu} />
+        <ConfigurationMenu
+          display={displayConfigMenu}
+          nodes={nodes}
+          setNodes={setNodes}
+          connectors={connectors}
+          setConnectors={setConnectors}
+        />
       </div>
       <div className="grid grid-cols-9 gap-4 py-5 h-full [&>div]:rounded-2xl">
         <ListsContainer
