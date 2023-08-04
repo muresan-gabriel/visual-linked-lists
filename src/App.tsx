@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Homepage from "./pages/Homepage.tsx";
+import ContextMenu from "./components/ContextMenu.tsx";
 
 interface AppProps {}
 

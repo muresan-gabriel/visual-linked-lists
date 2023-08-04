@@ -1,6 +1,6 @@
 import React from "react";
 
-import State from "../State";
+import State from "../State.ts";
 import {
   CpuChipIcon,
   HashtagIcon,
@@ -8,11 +8,39 @@ import {
 } from "@heroicons/react/24/outline";
 import { CheckIcon } from "@heroicons/react/24/solid";
 
-export default function AddressTypeSelector() {
+import ListNode from "../interfaces/ListNode.ts";
+import Connector from "../interfaces/Connector.ts";
+
+interface AddressTypeSelectorProps {
+  nodes: ListNode[];
+  setNodes: React.Dispatch<React.SetStateAction<ListNode[]>>;
+  connectors: Connector[];
+  setConnectors: React.Dispatch<React.SetStateAction<Connector[]>>;
+}
+
+export default function AddressTypeSelector(props: AddressTypeSelectorProps) {
   const [state, setState] = React.useState<State>(new State());
+
+  function changeAddressType(addressType: string) {
+    State.setAddressType(addressType);
+
+    props.nodes.map((node) => {
+      if (node.pointer) {
+        node.setPointer(null);
+      }
+
+      node.setOwnAddress(props.nodes);
+      return node;
+    });
+
+    props.setConnectors([]);
+
+    setState(new State());
+  }
+
   return (
-    <div className="flex px-2">
-      <div className="[&>button]:py-3 [&>button]:w-[25rem] [&>button]:transition [&>button]:duration-1 flex">
+    <div className="flex px-2 mb-2">
+      <div className="[&>button]:py-3 [&>button]:w-[25rem] [&>button]:transition [&>button]:duration-1 flex border border-slate-800 rounded-2xl">
         <button
           className={`flex items-center hover:bg-slate-800 rounded-tl-2xl rounded-bl-2xl px-2 ${
             state.addressType === "real"
@@ -20,8 +48,7 @@ export default function AddressTypeSelector() {
               : ""
           }`}
           onClick={() => {
-            State.setAddressType("real");
-            setState(new State());
+            changeAddressType("real");
           }}
         >
           <div
@@ -56,8 +83,7 @@ export default function AddressTypeSelector() {
               : ""
           }`}
           onClick={() => {
-            State.setAddressType("simplified");
-            setState(new State());
+            changeAddressType("simplified");
           }}
         >
           <div
@@ -91,8 +117,7 @@ export default function AddressTypeSelector() {
               : ""
           }`}
           onClick={() => {
-            State.setAddressType("integers");
-            setState(new State());
+            changeAddressType("integers");
           }}
         >
           <div

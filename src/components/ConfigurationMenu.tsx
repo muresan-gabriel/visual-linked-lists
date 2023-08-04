@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 import AddressTypeSelector from "./AddressTypeSelector.tsx";
+import ListTypeSelector from "./ListTypeSelector.tsx";
+import ListNode from "../interfaces/ListNode.ts";
+import Connector from "../interfaces/Connector.ts";
 
 interface ConfigurationMenuProps {
   display: boolean;
+  nodes: ListNode[];
+  setNodes: React.Dispatch<React.SetStateAction<ListNode[]>>;
+  connectors: Connector[];
+  setConnectors: React.Dispatch<React.SetStateAction<Connector[]>>;
 }
 
 export default function ConfigurationMenu(props: ConfigurationMenuProps) {
@@ -28,7 +35,13 @@ export default function ConfigurationMenu(props: ConfigurationMenuProps) {
         }`}
         id="configMenu"
       >
-        <AddressTypeSelector></AddressTypeSelector>
+        <AddressTypeSelector
+          nodes={props.nodes}
+          setNodes={props.setNodes}
+          connectors={props.connectors}
+          setConnectors={props.setConnectors}
+        ></AddressTypeSelector>
+        <ListTypeSelector></ListTypeSelector>
       </div>
     );
   } else {

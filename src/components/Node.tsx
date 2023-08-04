@@ -2,21 +2,24 @@ import Draggable, {
   DraggableEvent,
   DraggableEventHandler,
 } from "react-draggable";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import React from "react";
 
 import ListNode from "../interfaces/ListNode";
 import Connector from "../interfaces/Connector";
+import { Node as NodeClass } from "../utils/utils.functions";
+
+import State from "../State";
 
 interface NodeProps {
   node: ListNode;
   nodes: ListNode[];
-  setNodes: (nodes: ListNode[]) => void;
+  setNodes: React.Dispatch<React.SetStateAction<ListNode[]>>;
   offset: number;
   width: number;
   height: number;
   connectors: Connector[];
-  setConnectors: (connectors: Connector[]) => void;
+  setConnectors: React.Dispatch<React.SetStateAction<Connector[]>>;
   cursorRef: React.RefObject<any>;
   onDrag: DraggableEventHandler;
   onStop: DraggableEventHandler;
@@ -35,6 +38,7 @@ export default function Node({
   onDrag,
   onStop,
 }: NodeProps) {
+  const [editNode, setEditNode] = useState<boolean>(false);
   function addConnector() {
     setConnectors([...connectors, { from: node.own_address, to: cursorRef }]);
     localStorage.setItem("from_node", node.own_address);
@@ -64,6 +68,15 @@ export default function Node({
       localStorage.removeItem("from_node");
     }
   }
+  const acceptConnectionRef = useRef(null);
+
+  const handleNodeDataDoubleClick = () => {
+    setEditNode(true);
+  };
+
+  const handleNodeDataBlur = () => {
+    setEditNode(false);
+  };
 
   return (
     <Draggable
@@ -80,16 +93,36 @@ export default function Node({
       onStop={onStop}
     >
       <div
-        className="bg-slate-800 w-[18rem] flex text-md rounded-lg cursor-move absolute"
+        className="bg-slate-800 w-[18rem] h-[2.6rem] flex text-md rounded-lg cursor-move absolute node__container border-t border-slate-700"
         id={node.own_address}
       >
-        <span className="data bg-indigo-500 p-2 w-[9rem] rounded-lg text-center">
-          {node.data}
-        </span>
-        <span className="pointer p-2 w-[9rem] rounded-lg text-center ">
+        {editNode ? ( // Use conditional rendering to show either input or span
+          <input
+            className="data bg-violet-500 p-2 w-[9rem] rounded-lg text-center border-t border-indigo-400 transition duration-1"
+            maxLength={15}
+            value={node.data}
+            onBlur={handleNodeDataBlur}
+            onChange={(e) => {
+              const updatedNodes = nodes.map((editingNode) => {
+                if (editingNode.own_address === node.own_address)
+                  editingNode.setData(e.target.value);
+                return editingNode;
+              });
+              setNodes(updatedNodes);
+            }}
+          />
+        ) : (
+          <span
+            className="data bg-indigo-500 p-2 w-[9rem] rounded-lg text-center border-t border-indigo-400"
+            onDoubleClick={handleNodeDataDoubleClick}
+          >
+            {node.data}
+          </span>
+        )}
+        <span className="pointer p-2 w-[9rem] rounded-lg text-center">
           {node.pointer}
         </span>
-        <span className="absolute -translate-y-[1rem] translate-x-[9.5rem] text-xs bg-amber-600 w-[7.6rem] rounded-tl-md rounded-tr-md text-center">
+        <span className="absolute -translate-y-[1.08rem] translate-x-[9.5rem] text-xs bg-amber-600 w-[7.6rem] rounded-tl-md rounded-tr-md text-center border-t border-amber-500">
           {node.own_address}
         </span>
         <div
@@ -97,6 +130,7 @@ export default function Node({
           onClick={addConnector}
         ></div>
         <div
+          ref={acceptConnectionRef}
           className="absolute bg-transparent hover:bg-green-400 p-1 rounded-full cursor-pointer translate-x-[-0.2rem] top-[40%] transition duration-1"
           onClick={acceptConnection}
         ></div>

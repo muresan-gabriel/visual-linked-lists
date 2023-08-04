@@ -12,6 +12,10 @@ body {
   height: 100%;
 }
 
+.node__container.fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
 #configMenu.fade-in {
   z-index: 9999;
   animation: fadeIn 0.2s ease-in-out;
