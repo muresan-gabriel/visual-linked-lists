@@ -4,6 +4,7 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 
 import ListNode from "../interfaces/ListNode.ts";
 import Connector from "../interfaces/Connector.ts";
+import State from "../State.ts";
 
 interface ContextMenuProps {
   display: boolean;
@@ -38,6 +39,8 @@ export default function ContextMenu(props: ContextMenuProps) {
       props.setConnectors(updatedConnectors);
       localStorage.removeItem("selected_node_id");
       props.setDisplay(false);
+
+      State.freeMemory(selectedNodeId);
     }
   }
 

@@ -15,9 +15,9 @@ export default function ListTypeSelector() {
 
   return (
     <div className="flex px-2">
-      <div className="[&>button]:py-3 [&>button]:w-[37.5rem] [&>button]:transition [&>button]:duration-1 flex border border-slate-800 rounded-2xl">
+      <div className="[&>button]:py-3 xl:[&>button]:w-[37.5rem] [&>button]:w-[20rem] [&>button]:transition [&>button]:duration-1 flex xl:flex-row flex-col border border-slate-800 rounded-2xl">
         <button
-          className={`flex items-center hover:bg-slate-800 rounded-tl-2xl rounded-bl-2xl px-2 ${
+          className={`flex items-center hover:bg-slate-800 xl:rounded-tl-2xl xl:rounded-bl-2xl rounded-t-2xl xl:rounded-t-[0px] px-2 ${
             state.listType === "singly"
               ? "bg-slate-800 [&>div>svg]:text-indigo-500"
               : ""
@@ -53,7 +53,7 @@ export default function ListTypeSelector() {
           </div>
         </button>
         <button
-          className={`flex items-center hover:bg-slate-800 rounded-tr-2xl rounded-br-2xl px-2 ${
+          className={`flex items-center hover:bg-slate-800 xl:rounded-tr-2xl xl:rounded-br-2xl rounded-b-xl xl:rounded-b-[0px] xl:rounded-t-[0px] px-2 ${
             state.listType === "doubly"
               ? "bg-slate-800 [&>div>svg]:text-indigo-500"
               : ""

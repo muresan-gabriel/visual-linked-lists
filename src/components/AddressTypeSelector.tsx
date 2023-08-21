@@ -40,9 +40,9 @@ export default function AddressTypeSelector(props: AddressTypeSelectorProps) {
 
   return (
     <div className="flex px-2 mb-2">
-      <div className="[&>button]:py-3 [&>button]:w-[25rem] [&>button]:transition [&>button]:duration-1 flex border border-slate-800 rounded-2xl">
+      <div className="[&>button]:py-3 xl:[&>button]:w-[25rem] [&>button]:w-[20rem] [&>button]:transition [&>button]:duration-1 flex xl:flex-row flex-col border border-slate-800 rounded-2xl">
         <button
-          className={`flex items-center hover:bg-slate-800 rounded-tl-2xl rounded-bl-2xl px-2 ${
+          className={`flex items-center hover:bg-slate-800 xl:rounded-tl-2xl xl:rounded-bl-2xl rounded-t-2xl xl:rounded-t-[0px] px-2 ${
             state.addressType === "real"
               ? "bg-slate-800 [&>div>svg]:text-indigo-500"
               : ""
@@ -53,7 +53,7 @@ export default function AddressTypeSelector(props: AddressTypeSelectorProps) {
         >
           <div
             id="checkbox"
-            className="bg-slate-800 p-1 rounded-lg w-7 h-7 absolute translate-x-[22rem] translate-y-[-0.7rem] border border-slate-700 flex items-center justify-center"
+            className="bg-slate-800 p-1 rounded-lg w-7 h-7 absolute xl:translate-x-[22rem] translate-x-[17rem] translate-y-[-0.7rem] border border-slate-700 flex items-center justify-center"
           >
             {state.addressType === "real" ? (
               <CheckIcon className="w-4 h-4 text-slate-100" />
@@ -88,7 +88,7 @@ export default function AddressTypeSelector(props: AddressTypeSelectorProps) {
         >
           <div
             id="checkbox"
-            className="bg-slate-800 p-1 rounded-lg w-7 h-7 absolute translate-x-[22rem] translate-y-[-0.7rem] border border-slate-700 flex items-center justify-center"
+            className="bg-slate-800 p-1 rounded-lg w-7 h-7 absolute xl:translate-x-[22rem] translate-x-[17rem] translate-y-[-0.7rem] border border-slate-700 flex items-center justify-center"
           >
             {state.addressType === "simplified" ? (
               <CheckIcon className="w-4 h-4 text-slate-100" />
@@ -111,7 +111,7 @@ export default function AddressTypeSelector(props: AddressTypeSelectorProps) {
           </div>
         </button>
         <button
-          className={`flex items-center hover:bg-slate-800 rounded-tr-2xl rounded-br-2xl px-2 ${
+          className={`flex items-center hover:bg-slate-800 xl:rounded-tr-2xl xl:rounded-br-2xl rounded-b-2xl xl:rounded-b-[0px] px-2 ${
             state.addressType === "integers"
               ? "bg-slate-800 [&>div>svg]:text-indigo-500"
               : ""
@@ -122,7 +122,7 @@ export default function AddressTypeSelector(props: AddressTypeSelectorProps) {
         >
           <div
             id="checkbox"
-            className="bg-slate-800 p-1 rounded-lg w-7 h-7 absolute translate-x-[22rem] translate-y-[-0.7rem] border border-slate-700 flex items-center justify-center"
+            className="bg-slate-800 p-1 rounded-lg w-7 h-7 absolute xl:translate-x-[22rem] translate-x-[17rem] translate-y-[-0.7rem] border border-slate-700 flex items-center justify-center"
           >
             {state.addressType === "integers" ? (
               <CheckIcon className="w-4 h-4 text-slate-100" />

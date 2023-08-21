@@ -20,6 +20,7 @@ const ListsContainer: React.FC<ListsContainerProps> = ({
   connectors,
   setConnectors,
 }) => {
+  const [addingConnection, setAddingConnection] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +40,7 @@ const ListsContainer: React.FC<ListsContainerProps> = ({
 
   return (
     <div
-      className="bg-slate-900 col-span-7 border-t border-slate-800"
+      className="bg-slate-900 xl:col-span-7 col-span-9 border-t border-slate-800"
       id="parent"
       ref={parentRef}
       onContextMenu={(e) => {
@@ -70,6 +71,8 @@ const ListsContainer: React.FC<ListsContainerProps> = ({
             key={index}
             onDrag={updateXarrow}
             onStop={updateXarrow}
+            addingConnection={addingConnection}
+            setAddingConnection={setAddingConnection}
           ></Node>
         );
       })}

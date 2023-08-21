@@ -23,6 +23,8 @@ interface NodeProps {
   cursorRef: React.RefObject<any>;
   onDrag: DraggableEventHandler;
   onStop: DraggableEventHandler;
+  addingConnection: boolean;
+  setAddingConnection: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Node({
@@ -37,11 +39,15 @@ export default function Node({
   cursorRef,
   onDrag,
   onStop,
+  addingConnection,
+  setAddingConnection,
 }: NodeProps) {
   const [editNode, setEditNode] = useState<boolean>(false);
+
   function addConnector() {
     setConnectors([...connectors, { from: node.own_address, to: cursorRef }]);
     localStorage.setItem("from_node", node.own_address);
+    setAddingConnection(true);
   }
 
   function acceptConnection() {
@@ -66,6 +72,7 @@ export default function Node({
 
       setConnectors(updatedConnectors);
       localStorage.removeItem("from_node");
+      setAddingConnection(false);
     }
   }
   const acceptConnectionRef = useRef(null);
@@ -119,21 +126,58 @@ export default function Node({
             {node.data}
           </span>
         )}
+
         <span className="pointer p-2 w-[9rem] rounded-lg text-center">
           {node.pointer}
         </span>
+
         <span className="absolute -translate-y-[1.08rem] translate-x-[9.5rem] text-xs bg-amber-600 w-[7.6rem] rounded-tl-md rounded-tr-md text-center border-t border-amber-500">
           {node.own_address}
         </span>
-        <div
-          className="absolute bg-transparent hover:bg-slate-200 p-1 rounded-full cursor-pointer right-0 translate-x-[0.2rem] top-[40%] transition duration-1"
-          onClick={addConnector}
-        ></div>
-        <div
-          ref={acceptConnectionRef}
-          className="absolute bg-transparent hover:bg-green-400 p-1 rounded-full cursor-pointer translate-x-[-0.2rem] top-[40%] transition duration-1"
-          onClick={acceptConnection}
-        ></div>
+        {!addingConnection && (
+          <>
+            <div
+              className="absolute bg-transparent hover:bg-slate-200 p-1 rounded-full cursor-pointer right-0 translate-x-[0.2rem] top-[40%] transition duration-1"
+              onClick={addConnector}
+            ></div>
+            <div
+              className="absolute bg-transparent hover:bg-slate-200 p-1 rounded-full cursor-pointer translate-x-[-0.2rem] top-[40%] transition duration-1"
+              onClick={addConnector}
+            ></div>
+            <div
+              className="absolute bg-transparent hover:bg-slate-200 p-1 rounded-full cursor-pointer right-[48.6%] translate-y-[-0.2rem] top-0 transition duration-1"
+              onClick={addConnector}
+            ></div>
+            <div
+              className="absolute bg-transparent hover:bg-slate-200 p-1 rounded-full cursor-pointer right-[48.6%] translate-y-[0.2rem] bottom-0 transition duration-1"
+              onClick={addConnector}
+            ></div>
+          </>
+        )}
+        {addingConnection && (
+          <>
+            <div
+              ref={acceptConnectionRef}
+              className="absolute bg-transparent hover:bg-green-400 p-1 rounded-full cursor-pointer right-0 translate-x-[0.2rem] top-[40%] transition duration-1"
+              onClick={acceptConnection}
+            ></div>
+            <div
+              ref={acceptConnectionRef}
+              className="absolute bg-transparent hover:bg-green-400 p-1 rounded-full cursor-pointer translate-x-[-0.2rem] top-[40%] transition duration-1"
+              onClick={acceptConnection}
+            ></div>
+            <div
+              ref={acceptConnectionRef}
+              className="absolute bg-transparent hover:bg-green-400 p-1 rounded-full cursor-pointer right-[48.6%] translate-y-[-0.2rem] top-0 transition duration-1"
+              onClick={acceptConnection}
+            ></div>
+            <div
+              ref={acceptConnectionRef}
+              className="absolute bg-transparent hover:bg-green-400 p-1 rounded-full cursor-pointer right-[48.6%] translate-y-[0.2rem] bottom-0 transition duration-1"
+              onClick={acceptConnection}
+            ></div>
+          </>
+        )}
       </div>
     </Draggable>
   );
