@@ -100,7 +100,7 @@ export default function Node({
       onStop={onStop}
     >
       <div
-        className="bg-slate-800 w-[18rem] h-[2.6rem] flex text-md rounded-lg cursor-move absolute node__container border-t border-slate-700"
+        className="bg-slate-800 w-[18rem] h-[2.6rem] flex text-md rounded-lg cursor-move absolute node__container border-t border-slate-700 active:outline active:outline-slate-700"
         id={node.own_address}
       >
         {editNode ? ( // Use conditional rendering to show either input or span
